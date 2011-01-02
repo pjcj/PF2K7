@@ -2,17 +2,19 @@
 
 <form method="post" action="[% c.uri_for('/register') %]">
     <table>
-        [% row("Username",             "text",     "username"  ) %]
-        [% row("Password",             "password", "password"  ) %]
-        [% row("Name",                 "text",     "name"      ) %]
-        [% row("Email Address",        "text",     "email"     ) %]
-        [% row("Life Motto",           "text",     "motto1"    ) %]
-        [% row("Secondary Life Motto", "text",     "motto2"    ) %]
-        [% row("Likes",                "text",     "likes"     ) %]
-        [% row("Dislikes",             "text",     "dislikes"  ) %]
-        [% row("GPS Coordinates",      "text",     "gps"       ) %]
-        [% row("Primary Enneagram",    "text",     "enneagram1") %]
-        [% row("Secondary Enneagram",  "text",     "enneagram2") %]
+        [% row("Username",             "text",     "username",   "req") %]
+        [% row("Password",             "password", "password",   "req") %]
+        [% row("Name",                 "text",     "name",       "req") %]
+        [% row("Email Address",        "text",     "email",      "req") %]
+        [% row("Town",                 "text",     "email",      "req") %]
+        [% row("Country",              "text",     "email",      "req") %]
+        [% row("Life Motto",           "text",     "motto1",     "req") %]
+        [% row("Secondary Life Motto", "text",     "motto2",     "req") %]
+        [% row("Likes",                "text",     "likes",      0    ) %]
+        [% row("Dislikes",             "text",     "dislikes",   0    ) %]
+        [% row("GPS Coordinates",      "text",     "gps",        0    ) %]
+        [% row("Primary Enneagram",    "text",     "enneagram1", 0    ) %]
+        [% row("Secondary Enneagram",  "text",     "enneagram2", 0    ) %]
         <tr> <td> <input type="submit" value="Register" /> </td> </tr>
     </table>
 </form>

@@ -1,6 +1,7 @@
-[% MACRO row(text, type, name) BLOCK %]
+[% MACRO row(text, type, name, required, error) BLOCK %]
     <tr>
         <td align="left"> <b>[% text %]:</b> </td>
+        <td align="left"> [% IF required %] * [% END %] </td>
         <td align="left"> <input type="[% type %]" name="[% name %]" /> </td>
     </tr>
 [% END %]
