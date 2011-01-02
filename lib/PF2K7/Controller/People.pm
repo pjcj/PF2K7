@@ -3,6 +3,8 @@ package PF2K7::Controller::People;
 use Moose;
 use namespace::autoclean;
 
+use Email::Valid;
+
 BEGIN { extends "Catalyst::Controller" }
 
 sub index :Path :Args(0)
@@ -52,7 +54,20 @@ sub register :Local :Args(0)
 
     if (lc $c->req->method eq "post")
     {
-        my $params   = $c->req->params;
+        my $params = $c->req->params;
+        my @errors;
+
+        unless (Email::Valid->address($params->{email}))
+        {
+            push @errors, { email => "Invalid email address" };
+        }
+
+        if (@errors)
+        {
+            $c->stash(message => join "\n", map values %$_, @errors);
+            return;
+        }
+
         my $users_rs = $c->model("PF2K7::User");
         my $newuser  = $users_rs->create
         ({

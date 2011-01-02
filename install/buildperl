@@ -367,6 +367,8 @@ sub main ()
             DBIx::Class::TimeStamp
             DBIx::Class::EncodedColumn
             SQL::Translator
+            Regexp::Common
+            Email::Valid
 
             Catalyst
             Catalyst::Devel
