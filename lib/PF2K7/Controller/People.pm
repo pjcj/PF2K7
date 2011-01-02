@@ -56,6 +56,8 @@ sub register :Local :Args(0)
     {
         my $params = $c->req->params;
         my %errors;
+        my @fields = qw( username password name email town country motto1 motto2
+                         likes dislikes gps enneagram1 enneagram2 );
 
         unless (Email::Valid->address($params->{email}))
         {
@@ -71,15 +73,17 @@ sub register :Local :Args(0)
         {
             $c->stash(message => "Errors found on form");
             $c->stash(errors  => \%errors);
+            my %values;
+            $values{$_} = $params->{$_} for @fields;
+            $c->stash(values  => \%values);
+
             return;
         }
 
         my $users_rs = $c->model("PF2K7::User");
         my $newuser  = $users_rs->create
         ({
-            map { $_ => $params->{$_} }
-                qw( username password name email town country motto1 motto2
-                    likes dislikes gps enneagram1 enneagram2 )
+            map { $_ => $params->{$_} } @fields
         });
 
         unless ($c->authenticate({ username => $params->{username},
