@@ -55,16 +55,22 @@ sub register :Local :Args(0)
     if (lc $c->req->method eq "post")
     {
         my $params = $c->req->params;
-        my @errors;
+        my %errors;
 
         unless (Email::Valid->address($params->{email}))
         {
-            push @errors, { email => "Invalid email address" };
+            $errors{email} = "Invalid email address";
         }
 
-        if (@errors)
+        for (qw( username password name email town country motto1 motto2 ))
         {
-            $c->stash(message => join "\n", map values %$_, @errors);
+            $errors{$_} = "Required field" unless length $params->{$_}
+        }
+
+        if (%errors)
+        {
+            $c->stash(message => "Errors found on form");
+            $c->stash(errors  => \%errors);
             return;
         }
 
@@ -72,8 +78,8 @@ sub register :Local :Args(0)
         my $newuser  = $users_rs->create
         ({
             map { $_ => $params->{$_} }
-                qw( username password name email motto1 motto2 likes dislikes
-                    gps enneagram1 enneagram2 )
+                qw( username password name email town country motto1 motto2
+                    likes dislikes gps enneagram1 enneagram2 )
         });
 
         unless ($c->authenticate({ username => $params->{username},

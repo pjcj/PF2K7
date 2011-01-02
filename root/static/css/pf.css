@@ -4,7 +4,7 @@
         font-family: arial;
     }
     #header {
-        background-color: #990000; 
+        background-color: #990000;
         color: #ffffff;
         margin: 0px;
         padding: 1px;
@@ -18,7 +18,7 @@
     #navbar {
         position: absolute;
         background-color: #660000;
-        border-top: 1px solid white; 
+        border-top: 1px solid white;
         top: 74px;
         height: 24px; 
         width: 99%;
@@ -74,4 +74,8 @@
         color: #999999;
         left: 120px;
         font-size: 10px;
+    }
+    .form_error {
+        background-color: #990000;
+        color: white;
     }
