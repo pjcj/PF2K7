@@ -59,6 +59,13 @@ sub register :Local :Args(0)
         my @fields = qw( username password name email town country motto1 motto2
                          likes dislikes gps enneagram1 enneagram2 );
 
+        my $users_rs = $c->model("PF2K7::User");
+
+        if ($users_rs->find({username => $params->{username}}))
+        {
+            $errors{username} = "Username already in use - please pick another";
+        }
+
         unless (Email::Valid->address($params->{email}))
         {
             $errors{email} = "Invalid email address";
@@ -80,7 +87,6 @@ sub register :Local :Args(0)
             return;
         }
 
-        my $users_rs = $c->model("PF2K7::User");
         my $newuser  = $users_rs->create
         ({
             map { $_ => $params->{$_} } @fields
