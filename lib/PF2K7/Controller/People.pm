@@ -54,12 +54,18 @@ sub register :Local :Args(0)
 
     if (lc $c->req->method eq "post")
     {
-        my $params = $c->req->params;
+        my $params      = $c->req->params;
         my %errors;
-        my @fields = qw( username password name email town country motto1 motto2
-                         likes dislikes gps enneagram1 enneagram2 );
+        my @fields      = qw( username password name email town country motto1
+                              motto2 likes dislikes gps enneagram1 enneagram2 );
+        my @enneagrams1 = qw( unknown reformer helper motivator artist thinker
+                              loyalist enthusiast boss meditator );
+        my @enneagrams2 = ( "none", @enneagrams1 );
 
-        my $users_rs = $c->model("PF2K7::User");
+        my $users_rs    = $c->model("PF2K7::User");
+
+        $c->stash(enneagrams1 => \@enneagrams1);
+        $c->stash(enneagrams2 => \@enneagrams2);
 
         if ($users_rs->find({username => $params->{username}}))
         {
@@ -77,6 +83,11 @@ sub register :Local :Args(0)
             $errors{email} =
                 "Invalid email address (failed $Email::Valid::Details check)";
         }
+
+        $errors{enneagram1} = "Invalid enneagram"
+            unless $params->{enneagram1} ~~ @enneagrams1;
+        $errors{enneagram2} = "Invalid enneagram"
+            unless $params->{enneagram2} ~~ @enneagrams2;
 
         unless ($params->{gps} =~
             /^\s*\d+(?:\.\d+)? ?[NnSs] ?,? ?\d+(?:.\d+)? ?[EeWw]\s*$/)
