@@ -78,6 +78,13 @@ sub register :Local :Args(0)
                 "Invalid email address (failed $Email::Valid::Details check)";
         }
 
+        unless ($params->{gps} =~
+            /^\s*\d+(?:\.\d+)? ?[NnSs] ?,? ?\d+(?:.\d+)? ?[EeWw]\s*$/)
+        {
+            $errors{gps} = "GPS coordinates invalid";
+        }
+
+
         for (qw( username password name email town country motto1 motto2 ))
         {
             $errors{$_} = "Required field" unless length $params->{$_}
