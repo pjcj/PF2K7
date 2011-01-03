@@ -52,20 +52,21 @@ sub register :Local :Args(0)
 {
     my ($self, $c) = @_;
 
+    my @enneagrams1 = qw( unknown reformer helper motivator artist thinker
+                          loyalist enthusiast boss meditator );
+    my @enneagrams2 = ( "none", @enneagrams1 );
+
+    $c->stash(enneagrams1 => \@enneagrams1);
+    $c->stash(enneagrams2 => \@enneagrams2);
+
     if (lc $c->req->method eq "post")
     {
-        my $params      = $c->req->params;
+        my $params = $c->req->params;
         my %errors;
-        my @fields      = qw( username password name email town country motto1
-                              motto2 likes dislikes gps enneagram1 enneagram2 );
-        my @enneagrams1 = qw( unknown reformer helper motivator artist thinker
-                              loyalist enthusiast boss meditator );
-        my @enneagrams2 = ( "none", @enneagrams1 );
+        my @fields = qw( username password name email town country motto1
+                         motto2 likes dislikes gps enneagram1 enneagram2 );
 
-        my $users_rs    = $c->model("PF2K7::User");
-
-        $c->stash(enneagrams1 => \@enneagrams1);
-        $c->stash(enneagrams2 => \@enneagrams2);
+        my $users_rs = $c->model("PF2K7::User");
 
         if ($users_rs->find({username => $params->{username}}))
         {
@@ -94,7 +95,6 @@ sub register :Local :Args(0)
         {
             $errors{gps} = "GPS coordinates invalid";
         }
-
 
         for (qw( username password name email town country motto1 motto2 ))
         {
