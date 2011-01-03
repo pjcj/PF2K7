@@ -369,6 +369,7 @@ sub main ()
             SQL::Translator
             Regexp::Common
             Email::Valid
+            Net::Domain::TLD
 
             Catalyst
             Catalyst::Devel

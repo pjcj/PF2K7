@@ -66,7 +66,12 @@ sub register :Local :Args(0)
             $errors{username} = "Username already in use - please pick another";
         }
 
-        unless (Email::Valid->address($params->{email}))
+        unless (Email::Valid->address
+                   (
+                       -address  => $params->{email},
+                       -tldcheck => 1
+                   )
+               )
         {
             $errors{email} = "Invalid email address";
         }
