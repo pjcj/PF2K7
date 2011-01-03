@@ -70,6 +70,7 @@ sub register :Local :Args(0)
                    (
                        -address  => $params->{email},
                        -tldcheck => 1,
+                       -mxcheck  => 0,
                    )
                )
         {
