@@ -20,12 +20,12 @@ sub login :Local :Args(0)
 
     if (lc $c->req->method eq "post")
     {
-        my $params = $c->req->params;
+        my $p = $c->req->params;
 
-        if ($params->{username} && $params->{password})
+        if ($p->{username} && $p->{password})
         {
-            if ($c->authenticate({ username => $params->{username},
-                                   password => $params->{password} }))
+            if ($c->authenticate({ username => $p->{username},
+                                   password => $p->{password} }))
             {
                 # $c->response->redirect($c->uri_for(
                     # $c->controller('Books')->action_for('list')));
@@ -55,70 +55,54 @@ sub register :Local :Args(0)
     my @enneagrams1 = qw( unknown reformer helper motivator artist thinker
                           loyalist enthusiast boss meditator );
     my @enneagrams2 = ( "none", @enneagrams1 );
-
     $c->stash(enneagrams1 => \@enneagrams1);
     $c->stash(enneagrams2 => \@enneagrams2);
 
     if (lc $c->req->method eq "post")
     {
-        my $params = $c->req->params;
+        my $p = $c->req->params;
         my %errors;
         my @fields = qw( username password name email town country motto1
                          motto2 likes dislikes gps enneagram1 enneagram2 );
 
         my $users_rs = $c->model("PF2K7::User");
 
-        if ($users_rs->find({username => $params->{username}}))
-        {
-            $errors{username} = "Username already in use - please pick another";
-        }
+        $errors{username} = "Username already in use - please pick another"
+            if $users_rs->find({username => $p->{username}});
 
-        unless (Email::Valid->address
-                   (
-                       -address  => $params->{email},
-                       -tldcheck => 1,
-                       -mxcheck  => 0,
-                   )
-               )
-        {
-            $errors{email} =
-                "Invalid email address (failed $Email::Valid::Details check)";
-        }
+        $errors{email} =
+            "Invalid email address (failed $Email::Valid::Details check)"
+            unless (Email::Valid->address(-address  => $p->{email},
+                                          -tldcheck => 1,
+                                          -mxcheck  => 0));
 
         $errors{enneagram1} = "Invalid enneagram"
-            unless $params->{enneagram1} ~~ @enneagrams1;
+            unless $p->{enneagram1} ~~ @enneagrams1;
         $errors{enneagram2} = "Invalid enneagram"
-            unless $params->{enneagram2} ~~ @enneagrams2;
+            unless $p->{enneagram2} ~~ @enneagrams2;
 
-        unless ($params->{gps} =~
-            /^\s*\d+(?:\.\d+)? ?[NnSs] ?,? ?\d+(?:.\d+)? ?[EeWw]\s*$/)
-        {
-            $errors{gps} = "GPS coordinates invalid";
-        }
+        $errors{gps} = "GPS coordinates invalid"
+            unless $p->{gps} =~
+                /^\s*\d+(?:\.\d+)? ?[NnSs] ?,? ?\d+(?:.\d+)? ?[EeWw]\s*$/;
 
         for (qw( username password name email town country motto1 motto2 ))
         {
-            $errors{$_} = "Required field" unless length $params->{$_}
+            $errors{$_} = "Required field" unless length $p->{$_}
         }
 
         if (%errors)
         {
             $c->stash(message => "Errors found on form");
             $c->stash(errors  => \%errors);
-            my %values;
-            $values{$_} = $params->{$_} for @fields;
+            my %values; $values{$_} = $p->{$_} for @fields;
             $c->stash(values  => \%values);
-
             return;
         }
 
-        my $newuser  = $users_rs->create
-        ({
-            map { $_ => $params->{$_} } @fields
-        });
+        my $newuser = $users_rs->create({ map { $_ => $p->{$_} } @fields });
 
-        unless ($c->authenticate({ username => $params->{username},
-                                   password => $params->{password} }))
+        unless ($c->authenticate({ username => $p->{username},
+                                   password => $p->{password} }))
         {
             $c->stash(message => "Registration failed.");
             return;
