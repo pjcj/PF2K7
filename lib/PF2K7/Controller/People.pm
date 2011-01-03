@@ -69,11 +69,12 @@ sub register :Local :Args(0)
         unless (Email::Valid->address
                    (
                        -address  => $params->{email},
-                       -tldcheck => 1
+                       -tldcheck => 1,
                    )
                )
         {
-            $errors{email} = "Invalid email address";
+            $errors{email} =
+                "Invalid email address (failed $Email::Valid::Details check)";
         }
 
         for (qw( username password name email town country motto1 motto2 ))
