@@ -1,24 +1,3 @@
 [% PROCESS "macros.tt2" %]
-
-<form method="post" action="[% c.uri_for('/register') %]">
-    <table>
-        [% row("Username",             "text",     "username",   "req"         ) %]
-        [% row("Password",             "password", "password",   "req"         ) %]
-        [% row("Name",                 "text",     "name",       "req"         ) %]
-        [% row("Email Address",        "text",     "email",      "req"         ) %]
-        [% row("Town",                 "text",     "town",       "req"         ) %]
-        [% row("Country",              "text",     "country",    "req"         ) %]
-        [% row("Life Motto",           "text",     "motto1",     "req"         ) %]
-        [% row("Secondary Life Motto", "text",     "motto2",     "req"         ) %]
-        [% row("Likes",                "text",     "likes",      0             ) %]
-        [% row("Dislikes",             "text",     "dislikes",   0             ) %]
-        [% row("GPS Coordinates",      "text",     "gps",        0             ) %]
-        [% row("Primary Enneagram",    "select",   "enneagram1", 0, enneagrams1) %]
-        [% row("Secondary Enneagram",  "select",   "enneagram2", 0, enneagrams2) %]
-        <tr> <td> <input type="submit" value="Register" /> </td> </tr>
-    </table>
-</form>
-
-<p>
-
+[% c.controller().form_user_register().render() %]
 Already a member? <a href="[% c.uri_for('/login') %]">Login</a> here.
