@@ -107,7 +107,7 @@ sub register :Local :Args(0)
     if (lc $c->req->method eq "post")
     {
         my $p = $c->req->params;
-        my $errors;
+        my $errors = {};
         my @fields = qw( username password name email town country motto1
                          motto2 likes dislikes gps enneagram1 enneagram2 );
 
@@ -115,7 +115,7 @@ sub register :Local :Args(0)
         $errors->{username} = "Username already in use - please pick another"
             if $users_rs->find({username => $p->{username}});
         return unless
-            $self->validate_fields($c, $p, \@fields,
+            $self->validate_fields($c, $p, $errors, \@fields,
                                    qw( username password name email town
                                        country motto1 motto2 ));
 
@@ -150,10 +150,10 @@ sub status :Local :Args(0)
     if (lc $c->req->method eq "post")
     {
         my $p = $c->req->params;
-        my $errors;
+        my $errors = {};
         my $users_rs = $c->model("PF2K7::User");
         return unless
-            $self->validate_fields($c, $p, \@fields,
+            $self->validate_fields($c, $p, $errors, \@fields,
                                    qw( name email town country motto1 motto2 ));
 
         # push @fields, "password" if length $p->{password};
