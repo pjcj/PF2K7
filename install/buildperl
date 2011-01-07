@@ -370,6 +370,7 @@ sub main ()
             Regexp::Common
             Email::Valid
             Net::Domain::TLD
+            HTML::FormHandler::Moose
 
             Catalyst
             Catalyst::Devel
