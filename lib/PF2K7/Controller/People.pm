@@ -45,7 +45,7 @@ sub logout :Local :Args(0)
     my ($self, $c) = @_;
 
     $c->logout;
-    $c->response->redirect($c->uri_for('/'));
+    $c->response->redirect($c->uri_for("/"));
 }
 
 {
@@ -101,6 +101,8 @@ sub validate_fields
 sub register :Local :Args(0)
 {
     my ($self, $c) = @_;
+
+    $c->response->redirect($c->uri_for("/")) if $c->user_exists;
 
     $self->set_stash($c);
 
