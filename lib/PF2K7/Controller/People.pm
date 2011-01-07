@@ -158,7 +158,7 @@ sub status :Local :Args(0)
             $self->validate_fields($c, $p, $errors, \@fields,
                                    qw( name email town country motto1 motto2 ));
 
-        # push @fields, "password" if length $p->{password};
+        push @fields, "password" if length $p->{password};
         my $user = $c->user->obj;
         $user->update({ map { $_ => $p->{$_} } @fields });
         $c->persist_user;
