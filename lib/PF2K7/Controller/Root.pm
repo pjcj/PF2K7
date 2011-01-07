@@ -34,6 +34,12 @@ sub register :Local
     $c->go("/people/register");
 }
 
+sub status :Local
+{
+    my ($self, $c) = @_;
+    $c->go("/people/status");
+}
+
 sub default :Path {
     my ($self, $c) = @_;
     $c->response->body("Page not found");

@@ -16,6 +16,7 @@
             [% IF c.check_user_roles( "can_whisper" ) %]
                 <a href="[% c.uri_for('/ideas/whisper') %]">Tell</a>
             [% END %]
+            <a href="[% c.uri_for('/status') %]">Status</a>
             <a href="[% c.uri_for('/logout') %]">Logout</a>
             [% c.user.name %]
         [% ELSE %]

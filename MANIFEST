@@ -1,6 +1,7 @@
 .gitignore
 Changes
 db/pf.sql
+docs/platforms-task.pdf
 install/buildperl
 install/db
 install/SETUP
@@ -28,6 +29,7 @@ root/lib/site/wrapper
 root/src/macros.tt2
 root/src/people/login.tt2
 root/src/people/register.tt2
+root/src/people/status.tt2
 root/src/pf/home.tt2
 root/static/css/pf.css
 root/static/images/btn_120x50_built.png
