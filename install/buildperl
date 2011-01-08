@@ -366,6 +366,7 @@ sub main ()
             DBIx::Class::Schema::Loader::DBI::SQLite
             DBIx::Class::TimeStamp
             DBIx::Class::EncodedColumn
+            DBIx::Class::DeploymentHandler
             SQL::Translator
             Regexp::Common
             Email::Valid
@@ -391,6 +392,7 @@ sub main ()
             Catalyst::ScriptRunner
 
             MooseX::Declare
+            MooseX::NonMoose
 
             Starman
             Net::Server::SS::PreFork
@@ -464,7 +466,7 @@ sub main ()
     }
 
 
-    if (building "postgres" || building "dry")
+    if (building "postgres")
     {
         my $pg   = "$Installation/pgsql";
         my $data = "$pg/data";
