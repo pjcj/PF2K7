@@ -391,6 +391,7 @@ sub main ()
             Catalyst::View::TT
             Catalyst::Test
             Catalyst::ScriptRunner
+            Catalyst::Controller::REST
 
             MooseX::Declare
             MooseX::NonMoose
