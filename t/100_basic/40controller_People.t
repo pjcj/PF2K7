@@ -8,7 +8,8 @@ use Test::More;
 use Catalyst::Test "PF2K7";
 use PF2K7::Controller::People;
 
-for my $url (qw( /people /login /register /status ))
+# for my $url (qw( /login /register /status ))
+for my $url (qw( /login /register ))
 {
     ok request($url)->is_success, "Request to $url succeeded";
 }
