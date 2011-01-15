@@ -10,10 +10,10 @@ sub index :Path :Args(0) :ActionClass("REST")
     my ($self, $c) = @_;
 }
 
-# sub record :Path :Args(0) :ActionClass("REST")
-# {
-    # my ($self, $c) = @_;
-# }
+sub record :Path :Args(0) :ActionClass("REST")
+{
+    my ($self, $c) = @_;
+}
 
 sub index_PUT
 {
@@ -22,6 +22,13 @@ sub index_PUT
     my $url = $c->req->data->{url};
 
     $c->log->debug("put url [$url]");
+
+    $self->status_created
+    (
+        $c,
+        location => $c->req->uri->as_string,
+        entity => { $url => "[[[-$url-]]]" }
+    );
 
     return;
 
@@ -43,6 +50,34 @@ sub index_PUT
     }
 }
 
+*record_PUT = *index_PUT;
+
+sub record_GET
+{
+    my ($self, $c, $uri) = @_;
+
+    $c->log->debug("get uri [$uri]");
+
+    $self->status_ok
+    (
+        $c,
+        entity => { $uri => "{{{-$uri-}}}" }
+    );
+
+    return;
+
+    my $model = $c->model('Calais');
+    # see how $uri is automatically unescaped by Catalyst.
+    if (exists $model->storage->{$uri})
+    {
+        $self->status_ok( $c,
+            entity => { $uri => $model->storage->{$uri} },
+        );
+    }
+    else {
+        $self->status_not_found($c, {message => "$uri is not in the database"});
+    }
+}
 
 __PACKAGE__->meta->make_immutable;
 
