@@ -1,16 +1,19 @@
 package PF2K7::Model::PF2K7;
 
 use strict;
-use base 'Catalyst::Model::DBIC::Schema';
+use warnings;
+
+use base "Catalyst::Model::DBIC::Schema";
 
 __PACKAGE__->config(
-    schema_class => 'PF2K7::Schema',
-    
+    schema_class => "PF2K7::Schema",
+    traits       => [ "QueryLog::AdoptPlack" ],
+
     connect_info => {
-        dsn => 'dbi:SQLite:db/pf.db',
-        user => '',
-        password => '',
-        on_connect_do => q{PRAGMA foreign_keys = ON},
+        dsn           => "dbi:SQLite:db/pf.db",
+        user          => "",
+        password      => "",
+        on_connect_do => "PRAGMA foreign_keys = ON",
     }
 );
 

@@ -17,6 +17,6 @@ builder
 {
     enable "Debug",
            panels => [qw( DBITrace Memory Timer Environment Response Parameters
-                          CatalystLog )];
+                          CatalystLog DBIC::QueryLog )];
     $app
 }

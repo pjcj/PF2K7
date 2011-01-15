@@ -401,6 +401,8 @@ sub main ()
             Server::Starter
 
             Plack::Middleware::Debug
+            Plack::Middleware::Debug::DBIC::QueryLog
+            Catalyst::TraitFor::Model::DBIC::Schema::QueryLog::AdoptPlack
 
             CPAN::DistnameInfo
             Gitalist
