@@ -149,8 +149,6 @@ __PACKAGE__->add_columns(
   { data_type => "int", default_value => 0, is_nullable => 0, size => 8 },
   "enneagram2",
   { data_type => "int", default_value => 0, is_nullable => 0, size => 8 },
-  "enneagram3",
-  { data_type => "int", default_value => 0, is_nullable => 0, size => 8 },
 );
 __PACKAGE__->set_primary_key("id");
 

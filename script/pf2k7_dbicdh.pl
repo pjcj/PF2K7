@@ -13,7 +13,7 @@ use PF2K7::Schema;
 
 my $config = Config::JFDI->new( name => 'PF2K7', path => "$FindBin::Bin/../" );
 my $config_hash  = $config->get();
-my $connect_info = $config_hash->{'PF2K7::Model::PF2K7'}{connect_info};
+my $connect_info = $config_hash->{'Model::PF2K7'}{connect_info};
 my $schema       = PF2K7::Schema->connect($connect_info);
 
 my $dh = DH->new({
