@@ -1,8 +1,5 @@
 package PF2K7::Schema::Result::User;
 
-# Created by DBIx::Class::Schema::Loader
-# DO NOT MODIFY THE FIRST PART OF THIS FILE
-
 use strict;
 use warnings;
 
@@ -136,7 +133,12 @@ __PACKAGE__->add_columns(
   "username",
   { data_type => "char", default_value => "", is_nullable => 0, size => 64 },
   "password",
-  { data_type => "char", is_nullable => 0, size => 64 },
+  { data_type => "char", is_nullable => 0, size => 64,
+    encode_column       => 1,
+    encode_class        => "Digest",
+    encode_args         => { salt_length => 10 },
+    encode_check_method => "check_password",
+  },
   "likes",
   { data_type => "char", default_value => "", is_nullable => 0, size => 256 },
   "dislikes",
@@ -146,6 +148,8 @@ __PACKAGE__->add_columns(
   "enneagram1",
   { data_type => "int", default_value => 0, is_nullable => 0, size => 8 },
   "enneagram2",
+  { data_type => "int", default_value => 0, is_nullable => 0, size => 8 },
+  "enneagram3",
   { data_type => "int", default_value => 0, is_nullable => 0, size => 8 },
 );
 __PACKAGE__->set_primary_key("id");
@@ -167,25 +171,19 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
-
-# Created by DBIx::Class::Schema::Loader v0.07002 @ 2010-12-23 02:01:24
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:ZJKAvwPmmdDrnyPDTPYEfQ
-
-# You can replace this text with custom content, and it will be preserved on regeneration
-
 __PACKAGE__->many_to_many( roles => "users_to_roles", "role");
 
 # Have the "password" column use a SHA-1 hash and 10-character salt
 # with hex encoding; Generate the "check_password" method.
-__PACKAGE__->add_columns
-(
-    "password" =>
-    {
-        encode_column       => 1,
-        encode_class        => "Digest",
-        encode_args         => { salt_length => 10 },
-        encode_check_method => "check_password",
-    },
-);
+#__PACKAGE__->add_columns
+#(
+#    "password" =>
+#    {
+#        encode_column       => 1,
+#        encode_class        => "Digest",
+#        encode_args         => { salt_length => 10 },
+#        encode_check_method => "check_password",
+#    },
+#);
 
 1;

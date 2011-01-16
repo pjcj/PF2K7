@@ -23,3 +23,11 @@ Set up your environment:
 Create the initial database:
 
     $ utils/create_db
+
+    $ createuser -P pf
+      Enter password for new role: pf
+      Enter it again: pf
+      Shall the new role be a superuser? (y/n) n
+      Shall the new role be allowed to create databases? (y/n) n
+      Shall the new role be allowed to create more new roles? (y/n) n
+    $ createdb -O pf pf2k7

@@ -15,3 +15,14 @@ Plugin::Authentication:
         user_model:    PF2K7::User
         password_type: self_check
 disable_component_resolution_regex_fallback: 1
+Model::PF2K7:
+  schema_class: PF2K7::Schema
+  traits:
+    - QueryLog::AdoptPlack
+  connect_info:
+    dsn:        dbi:Pg:dbname=pf2k7
+    user:       pf
+    password:   pf
+    AutoCommit: 1
+    quote_char: ""
+    name_sep:   .

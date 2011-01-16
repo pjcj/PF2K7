@@ -5,17 +5,17 @@ use warnings;
 
 use base "Catalyst::Model::DBIC::Schema";
 
-__PACKAGE__->config(
-    schema_class => "PF2K7::Schema",
-    traits       => [ "QueryLog::AdoptPlack" ],
-
-    connect_info => {
-        dsn           => "dbi:SQLite:db/pf.db",
-        user          => "",
-        password      => "",
-        on_connect_do => "PRAGMA foreign_keys = ON",
-    }
-);
+#__PACKAGE__->config(
+#    schema_class => "PF2K7::Schema",
+#    traits       => [ "QueryLog::AdoptPlack" ],
+#
+#    connect_info => {
+#        dsn           => "dbi:SQLite:db/pf.db",
+#        user          => "",
+#        password      => "",
+#        on_connect_do => "PRAGMA foreign_keys = ON",
+#    }
+#);
 
 =head1 NAME
 
