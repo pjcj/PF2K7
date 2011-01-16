@@ -25,76 +25,76 @@ __PACKAGE__->table("users");
 
 =head2 email
 
-  data_type: 'char'
+  data_type: 'varchar'
   default_value: (empty string)
   is_nullable: 0
   size: 64
 
 =head2 name
 
-  data_type: 'char'
+  data_type: 'varchar'
   default_value: (empty string)
   is_nullable: 0
   size: 64
 
 =head2 town
 
-  data_type: 'char'
+  data_type: 'varchar'
   default_value: (empty string)
   is_nullable: 0
   size: 64
 
 =head2 country
 
-  data_type: 'char'
+  data_type: 'varchar'
   default_value: (empty string)
   is_nullable: 0
   size: 64
 
 =head2 motto1
 
-  data_type: 'char'
+  data_type: 'varchar'
   default_value: (empty string)
   is_nullable: 0
   size: 256
 
 =head2 motto2
 
-  data_type: 'char'
+  data_type: 'varchar'
   default_value: (empty string)
   is_nullable: 0
   size: 256
 
 =head2 username
 
-  data_type: 'char'
+  data_type: 'varchar'
   default_value: (empty string)
   is_nullable: 0
   size: 64
 
 =head2 password
 
-  data_type: 'char'
+  data_type: 'varchar'
   is_nullable: 0
   size: 64
 
 =head2 likes
 
-  data_type: 'char'
+  data_type: 'varchar'
   default_value: (empty string)
   is_nullable: 0
   size: 256
 
 =head2 dislikes
 
-  data_type: 'char'
+  data_type: 'varchar'
   default_value: (empty string)
   is_nullable: 0
   size: 256
 
 =head2 gps
 
-  data_type: 'char'
+  data_type: 'varchar'
   default_value: (empty string)
   is_nullable: 0
   size: 16
@@ -119,32 +119,32 @@ __PACKAGE__->add_columns(
   "id",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "email",
-  { data_type => "char", default_value => "", is_nullable => 0, size => 64 },
+  { data_type => "varchar", default_value => "", is_nullable => 0, size => 64 },
   "name",
-  { data_type => "char", default_value => "", is_nullable => 0, size => 64 },
+  { data_type => "varchar", default_value => "", is_nullable => 0, size => 64 },
   "town",
-  { data_type => "char", default_value => "", is_nullable => 0, size => 64 },
+  { data_type => "varchar", default_value => "", is_nullable => 0, size => 64 },
   "country",
-  { data_type => "char", default_value => "", is_nullable => 0, size => 64 },
+  { data_type => "varchar", default_value => "", is_nullable => 0, size => 64 },
   "motto1",
-  { data_type => "char", default_value => "", is_nullable => 0, size => 256 },
+  { data_type => "varchar", default_value => "", is_nullable => 0, size => 256 },
   "motto2",
-  { data_type => "char", default_value => "", is_nullable => 0, size => 256 },
+  { data_type => "varchar", default_value => "", is_nullable => 0, size => 256 },
   "username",
-  { data_type => "char", default_value => "", is_nullable => 0, size => 64 },
+  { data_type => "varchar", default_value => "", is_nullable => 0, size => 64 },
   "password",
-  { data_type => "char", is_nullable => 0, size => 64,
+  { data_type => "varchar", is_nullable => 0, size => 64,
     encode_column       => 1,
     encode_class        => "Digest",
     encode_args         => { salt_length => 10 },
     encode_check_method => "check_password",
   },
   "likes",
-  { data_type => "char", default_value => "", is_nullable => 0, size => 256 },
+  { data_type => "varchar", default_value => "", is_nullable => 0, size => 256 },
   "dislikes",
-  { data_type => "char", default_value => "", is_nullable => 0, size => 256 },
+  { data_type => "varchar", default_value => "", is_nullable => 0, size => 256 },
   "gps",
-  { data_type => "char", default_value => "", is_nullable => 0, size => 16 },
+  { data_type => "varchar", default_value => "", is_nullable => 0, size => 16 },
   "enneagram1",
   { data_type => "int", default_value => 0, is_nullable => 0, size => 8 },
   "enneagram2",

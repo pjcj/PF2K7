@@ -25,7 +25,7 @@ __PACKAGE__->table("roles");
 
 =head2 role
 
-  data_type: 'char'
+  data_type: 'varchar'
   default_value: NULL
   is_nullable: 1
   size: 32
@@ -36,7 +36,7 @@ __PACKAGE__->add_columns(
   "id",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "role",
-  { data_type => "char", default_value => \"NULL", is_nullable => 1, size => 32 },
+  { data_type => "varchar", default_value => \"NULL", is_nullable => 1, size => 32 },
 );
 __PACKAGE__->set_primary_key("id");
 
