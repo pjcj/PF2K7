@@ -471,7 +471,7 @@ sub main ()
     }
 
 
-    if (building "postgres")
+    if (building "postgres" or building "dry")
     {
         my $pg   = "$Installation/pgsql";
         my $data = "$pg/data";
