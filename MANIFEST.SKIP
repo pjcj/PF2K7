@@ -25,3 +25,5 @@ core$
 ^db/sql/
 ^db/pf*.db$
 ^inc/
+^dbicdh/_source/deploy/
+^dbicdh/PostgreSQL/deploy/

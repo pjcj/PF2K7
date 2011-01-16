@@ -1,6 +1,8 @@
 .gitignore
 Changes
 db/pf.sql
+dbicdh/PostgreSQL/upgrade/1-2/001-auto.sql
+dbicdh/PostgreSQL/upgrade/2-3/001-auto.sql
 docs/platforms-task.pdf
 install/buildperl
 install/db
@@ -20,6 +22,7 @@ lib/PF2K7/Schema/Result/User.pm
 lib/PF2K7/Schema/Result/UsersToRole.pm
 lib/PF2K7/View/JSON.pm
 lib/PF2K7/View/TT.pm
+lib/SQL/Translator/Producer/PostgreSQL.pm
 Makefile.PL
 MANIFEST			This list of files
 MANIFEST.SKIP
@@ -47,6 +50,7 @@ root/static/images/catalyst_logo.png
 script/pf2k7.psgi
 script/pf2k7_cgi.pl
 script/pf2k7_create.pl
+script/pf2k7_dbicdh.pl
 script/pf2k7_fastcgi.pl
 script/pf2k7_server.pl
 script/pf2k7_test.pl
