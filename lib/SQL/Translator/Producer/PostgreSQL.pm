@@ -851,7 +851,7 @@ sub alter_field
 	push @out, add_geometry_column($to_field) if is_geometry($to_field);
 	push @out, add_geometry_constraints($to_field) if is_geometry($to_field);
 	
-    return wantarray ? @out : join("\n", @out);
+    return wantarray ? @out : join(";\n", @out);
 }
 
 sub rename_field { alter_field(@_) }
